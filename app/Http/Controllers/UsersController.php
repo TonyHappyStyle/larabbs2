@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
 use App\Http\Requests\UserRequest;
+use App\Handlers\ImagesHandler;
 
 class UsersController extends Controller
 {
@@ -18,8 +19,15 @@ class UsersController extends Controller
         return view('users.edit',compact('user'));
     }
 
-    public function update(UserRequest $request,User $user){
-        $user->update($request->all());
+    public function update(UserRequest $request,User $user,ImagesHandler $imagesHandler){
+        $data = $request->all();
+        if($request->avatar){
+            $result = $imagesHandler->save($request->avatar,'avatars',Auth::id());
+            if($result){
+                $data['avatar'] = $result['avatar'];
+            }
+        }
+        $user->update($data);
         return redirect()->route('users.show',$user->id)->with('success','个人资料更新成功！');
     }
 }
