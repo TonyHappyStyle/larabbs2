@@ -31,14 +31,13 @@
               <textarea name="introduction" id="introduction-field" class="form-control" rows="3">{{ old('introduction', $user->introduction) }}</textarea>
             </div>
             <div class="form-group mb-4">
-              <label for="" class="avatar-label">个人头像</label>
+              <label for="" class="avatar-label">用户头像</label>
+              <input type="file" name="avatar" class="form-control-file">
+
               @if($user->avatar)
-                <br/>
+                <br>
                 <img class="thumbnail img-responsive" src="{{ $user->avatar }}" width="200" />
               @endif
-
-                <input type="file" name="avatar" class="form-control-file">
-
             </div>
             <div class="well well-sm">
               <button type="submit" class="btn btn-primary">保存</button>

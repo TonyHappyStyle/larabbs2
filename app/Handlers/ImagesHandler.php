@@ -5,26 +5,26 @@ use Illuminate\Support\Str;
 
 class ImagesHandler
 {
-    protected $ext=['png','jpg','gif','jpeg'];
+    protected $ext= ['png','jpg','gif','jpeg'];
 
-    public function save($file,$folder,$prefix)
+    public function save($file,$folder,$file_prefix)
     {
-        $folder_name = 'uploads/images/'.$folder.'/'.date("Ym/d",time());
+        $folder_name = 'uploads/images/'.$folder.'/'.date('Ym/d',time());
 
         $upload_path = public_path().'/'.$folder_name;
 
-        $extention = strtolower($file->getClientOriginalExtension())?:'png';
+        $extension = strtolower($file->getClientOriginalExtension())?:'png';
 
-        $file_name = $prefix.'_'.time().'_'.Str::random().'.'.$extention;
+        $file_name = $file_prefix.'_'.time().'_'.Str::random().'.'.$extension;
 
-        if(!in_array($extention,$this->ext)){
+        if(!in_array($extension,$this->ext)){
             return false;
         }
 
         $file->move($upload_path,$file_name);
 
-        $url_path = config('app.url')."/$folder_name/$file_name";
-
-        return ['avatar' => $url_path];
+        return [
+            'path'=> config('app.url')."/$folder_name/$file_name",
+        ];
     }
 }
