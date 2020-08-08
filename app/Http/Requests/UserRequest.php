@@ -28,15 +28,12 @@ class UserRequest extends FormRequest
             'name'=>'required|between:3,25|regex:/^[A-Za-z0-9\-\_]+$/|unique:users,name,'.Auth::id(),
             'email' => 'required|email',
             'introduction' => 'max:80',
-            'avatar' => 'mimes:jpeg,bmp,png,gif,jpg|dimensions:min_width=208,min_height=208'
         ];
     }
 
     public function messages()
     {
         return [
-            'avatar.mimes' =>'只允许上传jpeg,bmp,png,gif,jpg格式文件',
-            'avatar.dimensions' =>'只允许上传大于208＊208像素的图片',
             'name.unique' => '用户名已被占用，请重新填写',
             'name.regex' => '用户名只支持英文、数字、横杠和下划线。',
             'name.between' => '用户名必须介于 3 - 25 个字符之间。',
