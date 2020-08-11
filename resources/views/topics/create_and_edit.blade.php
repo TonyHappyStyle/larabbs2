@@ -68,8 +68,18 @@
   <script>
     $(document).ready(function() {
       var editor = new Simditor({
-        textarea: $('#editor'),
-      });
+          textarea: $('#editor'),
+          upload: {
+            url: '{{ route('topics.upload_image') }}',
+            params:{
+                '_token': '{{ csrf_token() }}'
+            },
+            fileKey:'upload_file',
+            connectionCount: 3,
+            leaveConfirm: 'Uploading is in progress, are you sure to leave this page?',
+          },
+          pasteImage: true,
+        });
     });
   </script>
 @stop
