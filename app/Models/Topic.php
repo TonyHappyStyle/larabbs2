@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Topic extends Model
 {
-    protected $fillable = ['title', 'body',];
+    protected $fillable = ['title', 'body','excerpt','slug','category_id'];
 
     public function category()
     {
