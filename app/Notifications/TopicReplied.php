@@ -46,6 +46,7 @@ class TopicReplied extends Notification
             'user_name' => $this->reply->user->name,
             'topic_id' => $topic->id,
             'topic_title' => $topic->title,
+            'topic_link' => $link,
         ];
     }
 
