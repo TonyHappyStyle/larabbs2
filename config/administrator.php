@@ -2,39 +2,19 @@
 
 return array(
 
-    /*
-     * 后台的URI入口
-     *
-     * @type string
-     */
+    // 后台的 URI 入口
     'uri' => 'admin',
 
-    /*
-     *  后台专属域名，没有的话可以留空
-     *
-     *  @type string
-     */
+    // 后台专属域名，没有的话可以留空
     'domain' => '',
 
-    /*
-     * 应用名称，在页面标题和左上角站点名称处显示
-     *
-     * @type string
-     */
-    'title' => config('app.name'),
+    // 应用名称，在页面标题和左上角站点名称处显示
+    'title' => env('APP_NAME', 'Laravel'),
 
-    /*
-     * 模型配置信息文件存放目录
-     *
-     * @type string
-     */
+    // 模型配置信息文件存放目录
     'model_config_path' => config_path('administrator'),
 
-    /*
-     * 配置信息文件存放目录
-     *
-     * @type string
-     */
+    // 配置信息文件存放目录
     'settings_config_path' => config_path('administrator/settings'),
 
     /*
@@ -69,7 +49,7 @@ return array(
      * `true` 为通过，`false` 会将页面重定向到 `login_path` 选项定义的 URL 中。
      */
     'permission' => function () {
-        //只要是能管理内容的用户，就允许访问后台
+        // 只要是能管理内容的用户，就允许访问后台
         return Auth::check() && Auth::user()->can('manage_contents');
     },
 
@@ -85,8 +65,7 @@ return array(
     'dashboard_view' => '',
 
     // 用来作为后台主页的菜单条目，由 `use_dashboard` 选项决定，菜单指的是 `menu` 选项
-    'home_page' => '',
-
+    'home_page' => 'users',
 
     // 右上角『返回主站』按钮的链接
     'back_to_site_path' => '/',
@@ -95,9 +74,6 @@ return array(
     'login_path' => 'login',
 
     // 允许在登录成功后使用 Session::get('redirect') 将用户重定向到原本想要访问的后台页面
-    'logout_path' => false,
-
-    // 控制模型数据列表页默认的显示条目
     'login_redirect_key' => 'redirect',
 
     // 控制模型数据列表页默认的显示条目
@@ -105,6 +81,4 @@ return array(
 
     // 可选的语言，如果不为空，将会在页面顶部显示『选择语言』按钮
     'locales' => [],
-
-    'custom_routes_file' => app_path('Http/routes/administrator.php'),
 );
