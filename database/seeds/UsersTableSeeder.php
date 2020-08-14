@@ -20,5 +20,12 @@ class UsersTableSeeder extends Seeder
         $user->introduction = 'myself fighting';
         $user->password = bcrypt('y1a2n3y4');
         $user->save();
+
+        //初始化1号用户为站长
+        $user->assignRole('Founder');
+        $user = User::find(2);
+        $user->assignRole('Maintainer');
+
+
     }
 }
