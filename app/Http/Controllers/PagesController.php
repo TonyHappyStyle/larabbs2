@@ -10,4 +10,15 @@ class PagesController extends Controller
     {
         return view('pages.root');
     }
+
+    public function permissionDenied()
+    {
+        dd(config('administrator.permission')());
+        if(config('administrator.permission')){
+            dd(\Auth::user()->can('manage_contents'));
+            return redirect(url(config('administrator.uri')),302);
+        }
+        dd('test1');
+        return view('pages.permission_denied');
+    }
 }
